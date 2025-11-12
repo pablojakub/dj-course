@@ -16,20 +16,21 @@ logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=lo
 # files = CORPORA_FILES["PAN_TADEUSZ"]
 files = CORPORA_FILES["ALL"]
 
-TOKENIZER_FILE = "../tokenizer/tokenizers/custom_bpe_tokenizer.json"
+TOKENIZER_FILE = "../tokenizer/tokenizers/tokenizer-all-corpora-64.json"
 # TOKENIZER_FILE = "../tokenizer/tokenizers/bielik-v1-tokenizer.json"
 # TOKENIZER_FILE = "../tokenizer/tokenizers/bielik-v3-tokenizer.json"
 
 OUTPUT_TENSOR_FILE = "embedding_tensor_cbow.npy"
 OUTPUT_MAP_FILE = "embedding_token_to_index_map.json"
 OUTPUT_MODEL_FILE = "embedding_word2vec_cbow_model.model"
+OUTPUT_SIMILAR_FILE = "similar_tokens_report64-vector50-epoch200.txt"
 
 # Parametry treningu Word2Vec (CBOW)
-VECTOR_LENGTH = 20
+VECTOR_LENGTH = 50
 WINDOW_SIZE = 6
 MIN_COUNT = 2         
 WORKERS = 4           
-EPOCHS = 20          
+EPOCHS = 200          
 SAMPLE_RATE = 1e-2
 SG_MODE = 0 # 0 dla CBOW, 1 dla Skip-gram
 
@@ -161,30 +162,44 @@ print("\n--- Weryfikacja: Szukanie podobieństw dla całych SŁÓW (uśrednianie
 
 # Przykłady, które wcześniej mogły nie działać
 words_to_test = ['wojsko', 'szlachta', 'choroba', 'król'] 
+with open(OUTPUT_SIMILAR_FILE, "w", encoding="utf-8") as out_f:
+    out_f.write("--- Weryfikacja: Szukanie podobieństw dla całych SŁÓW (uśrednianie wektorów tokenów) ---\n")
+    for word in words_to_test:
+        word_vector, similar_tokens = get_word_vector_and_similar(word, tokenizer, model, topn=10)
 
-for word in words_to_test:
-    word_vector, similar_tokens = get_word_vector_and_similar(word, tokenizer, model, topn=10)
-    
-    if word_vector is not None:
-        print(f"\n10 tokenów najbardziej podobnych do SŁOWA '{word}' (uśrednione wektory tokenów {tokenizer.encode(word).tokens}):")
-        # Wyświetlanie wektora (pierwsze 5 elementów)
-        print(f"  > Wektor słowa (początek): {word_vector[:5]}...")
-        for token, similarity in similar_tokens:
-            print(f"  - {token}: {similarity:.4f}")
+        if word_vector is not None:
+            header = f"\n10 tokenów najbardziej podobnych do SŁOWA '{word}' (uśrednione wektory tokenów {tokenizer.encode(word).tokens}):"
+            print(header)
+            out_f.write(header + "\n")
+            # Wyświetlanie wektora (pierwsze 5 elementów)
+            vec_preview = f"  > Wektor słowa (początek): {word_vector[:5]}..."
+            print(vec_preview)
+            out_f.write(vec_preview + "\n")
+            for token, similarity in similar_tokens:
+                line = f"  - {token}: {similarity:.4f}"
+                print(line)
+                out_f.write(line + "\n")
 
 # --- WERYFIKACJA DLA WZORCA MATEMATYCZNEGO (Analogia wektorowa) ---
 
-tokens_analogy = ['dziecko', 'kobieta']
+    tokens_analogy = ['dziecko', 'kobieta']
 
-# Używamy uśredniania wektorów dla tokenów
-if tokens_analogy[0] in model.wv and tokens_analogy[1] in model.wv:
-    similar_to_combined = model.wv.most_similar(
-        positive=tokens_analogy,
-        topn=10
-    )
+    # Używamy uśredniania wektorów dla tokenów
+    # Analogia wektorowa — zapis także do pliku
+    if tokens_analogy[0] in model.wv and tokens_analogy[1] in model.wv:
+        similar_to_combined = model.wv.most_similar(
+            positive=tokens_analogy,
+            topn=10
+        )
 
-    print(f"\n10 tokenów najbardziej podobnych do kombinacji tokenów: {tokens_analogy}")
-    for token, similarity in similar_to_combined:
-        print(f"  - {token}: {similarity:.4f}")
-else:
-    print(f"\nOstrzeżenie: Co najmniej jeden z tokenów '{tokens_analogy}' nie znajduje się w słowniku. Pomięto analogię.")
+        ana_header = f"\n10 tokenów najbardziej podobnych do kombinacji tokenów: {tokens_analogy}"
+        print(ana_header)
+        out_f.write(ana_header + "\n")
+        for token, similarity in similar_to_combined:
+            line = f"  - {token}: {similarity:.4f}"
+            print(line)
+            out_f.write(line + "\n")
+    else:
+        warn = f"\nOstrzeżenie: Co najmniej jeden z tokenów '{tokens_analogy}' nie znajduje się w słowniku. Pomięto analogię."
+        print(warn)
+        out_f.write(warn + "\n")

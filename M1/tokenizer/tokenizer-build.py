@@ -4,7 +4,11 @@ from tokenizers.trainers import BpeTrainer
 from tokenizers.pre_tokenizers import Whitespace
 from corpora import get_corpus_file
 
+<<<<<<< Updated upstream
 TOKENIZER_OUTPUT_FILE = "tokenizers/name_your_tokenizer.json"
+=======
+TOKENIZER_OUTPUT_FILE = "tokenizers/tokenizer-all-corpora-64.json"
+>>>>>>> Stashed changes
 
 # 1. Initialize the Tokenizer (BPE model)
 tokenizer = Tokenizer(BPE(unk_token="[UNK]")) 
@@ -15,11 +19,11 @@ tokenizer.pre_tokenizer = Whitespace()
 # 3. Set the Trainer
 trainer = BpeTrainer(
     special_tokens=["[UNK]", "[CLS]", "[SEP]", "[PAD]", "[MASK]"],
-    vocab_size=32000,
+    vocab_size=642000,
     min_frequency=2
 )
 
-FILES = [str(f) for f in get_corpus_file("WOLNELEKTURY", "latarnik.txt")]
+FILES = [str(f) for f in get_corpus_file("ALL", "*.txt")]
 print(FILES)
 
 # 4. Train the Tokenizer

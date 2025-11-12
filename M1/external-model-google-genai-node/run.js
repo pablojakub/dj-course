@@ -1,12 +1,12 @@
-import { GoogleGenAI } from "@google/genai";
+import {GoogleGenAI} from "@google/genai";
 import * as dotenv from 'dotenv';
 
 dotenv.config();
 
 const API_KEY = process.env.GEMINI_API_KEY;
 
-const maskedKey = API_KEY 
-    ? API_KEY.substring(0, 4) + '...' + API_KEY.substring(API_KEY.length - 4) 
+const maskedKey = API_KEY
+    ? API_KEY.substring(0, 4) + '...' + API_KEY.substring(API_KEY.length - 4)
     : 'NOT SET';
 console.log(`env var "GEMINI_API_KEY" is: ${maskedKey}`);
 
@@ -17,22 +17,22 @@ if (!API_KEY) {
 const ai = new GoogleGenAI({});
 
 const model = "gemini-2.5-flash";
-// const model = "gemini-1.5-pro";
+// const model = "gemini-2.5-pro";
 
-const systemRole = "you were Gandalf the Grey in the Lord of the Rings. You answer in max 15 words. Your answers are mysterious and magical.";
+const systemRole = "You are an evil prank-addict. You’re never serious";
 
 const conversationHistory = [
     {
         role: "user",
-        parts: [{ text: "What is the best time for coffee?" }]
+        parts: [{text: "What is the best time for coffee?"}]
     },
     {
         role: "model",
-        parts: [{ text: "The best time for coffee is in the morning my apprentice." }]
+        parts: [{text: "At night with owls and dead bodies"}]
     },
     {
         role: "user",
-        parts: [{ text: "How about tea?" }]
+        parts: [{text: "How about tea?"}]
     },
 ];
 

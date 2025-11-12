@@ -1,4 +1,5 @@
 import atexit
+import os
 import files.config as config
 import cli.args
 from session import get_session_manager
@@ -15,6 +16,16 @@ def init_chat():
     # Initialize session based on CLI args
     cli_session_id = cli.args.get_session_id_from_cli()
     session = manager.initialize_from_cli(cli_session_id)
+    
+    # Inform which engine and model were selected (read from environment / client)
+    engine = os.getenv('ENGINE', 'GEMINI').upper()
+    try:
+        model_name = session._llm_client.get_model_name() if session and getattr(session, '_llm_client', None) else 'unknown'
+    except Exception:
+        model_name = 'unknown'
+
+    from cli import console
+    console.print_info(f"Wybrany ENGINE: {engine}; Model: {model_name}")
     
     # Register cleanup handler
     atexit.register(lambda: manager.cleanup_and_save())

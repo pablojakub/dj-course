@@ -1,0 +1,65 @@
+--- Weryfikacja: Szukanie podobieństw dla całych SŁÓW (uśrednianie wektorów tokenów) ---
+
+10 tokenów najbardziej podobnych do SŁOWA 'wojsko' (uśrednione wektory tokenów ['wojsko']):
+  > Wektor słowa (początek): [ 1.3654819   0.29412314  7.429909   -0.45805916  1.0421873 ]...
+  - wojsko: 1.0000
+  - miasto: 0.7920
+  - wojska: 0.7828
+  - państwo: 0.7698
+  - pułki: 0.7306
+  - rycerstwo: 0.6830
+  - Szwedów: 0.6596
+  - ziemie: 0.6595
+  - chorągwie: 0.6534
+  - zwycięstwo: 0.6377
+
+10 tokenów najbardziej podobnych do SŁOWA 'szlachta' (uśrednione wektory tokenów ['szlachta']):
+  > Wektor słowa (początek): [-3.7775922   1.8463957   0.62838066  0.70103973 -0.4223211 ]...
+  - szlachta: 1.0000
+  - starszyzna: 0.7417
+  - czerń: 0.7346
+  - zgraja: 0.6779
+  - Czeremisy: 0.6731
+  - gromada: 0.6541
+  - czeladź: 0.6483
+  - służba: 0.6452
+  - Tatarowie: 0.6315
+  - ambasada: 0.6163
+
+10 tokenów najbardziej podobnych do SŁOWA 'choroba' (uśrednione wektory tokenów ['choroba']):
+  > Wektor słowa (początek): [-2.2153792 -0.0566256  1.5799588  1.4823756 -1.1439389]...
+  - choroba: 1.0000
+  - zdrada: 0.7599
+  - dusza: 0.7107
+  - ona: 0.6984
+  - gorączka: 0.6864
+  - taka: 0.6858
+  - energia: 0.6688
+  - jakaś: 0.6620
+  - radość: 0.6581
+  - zguba: 0.6567
+
+10 tokenów najbardziej podobnych do SŁOWA 'król' (uśrednione wektory tokenów ['król']):
+  > Wektor słowa (początek): [-4.7504053  -3.342998    3.7410555  -0.86272544 -4.279267  ]...
+  - król: 1.0000
+  - Chmielnicki: 0.8572
+  - książę: 0.8396
+  - hetman: 0.8175
+  - Radziwiłł: 0.7935
+  - mistrz: 0.7832
+  - wojewoda: 0.7429
+  - cezar: 0.7401
+  - chan: 0.7377
+  - jenerał: 0.7240
+
+10 tokenów najbardziej podobnych do kombinacji tokenów: ['dziecko', 'kobieta']
+  - ona: 0.8145
+  - matka: 0.7945
+  - dziewczyna: 0.7557
+  - Ligia: 0.7269
+  - dusza: 0.7246
+  - panienka: 0.7105
+  - ciotka: 0.6912
+  - córka: 0.6723
+  - głowa: 0.6645
+  - dziecię: 0.6573

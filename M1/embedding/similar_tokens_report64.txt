@@ -1,0 +1,65 @@
+--- Weryfikacja: Szukanie podobieństw dla całych SŁÓW (uśrednianie wektorów tokenów) ---
+
+10 tokenów najbardziej podobnych do SŁOWA 'wojsko' (uśrednione wektory tokenów ['wojsko']):
+  > Wektor słowa (początek): [ 1.0218505   0.99257153  2.4387536  -1.709659   -1.0424355 ]...
+  - wojsko: 1.0000
+  - miasto: 0.7365
+  - życie: 0.5812
+  - państwo: 0.5747
+  - wojska: 0.5695
+  - towarzystwo: 0.5511
+  - świątynie: 0.5498
+  - rycerstwo: 0.5294
+  - pospólstwo: 0.5130
+  - Prusy: 0.5065
+
+10 tokenów najbardziej podobnych do SŁOWA 'szlachta' (uśrednione wektory tokenów ['szlachta']):
+  > Wektor słowa (początek): [-0.62973964  3.3400984   4.0060883  -2.935375    1.3737508 ]...
+  - szlachta: 1.0000
+  - czerń: 0.6121
+  - starszyzna: 0.6032
+  - cała: 0.5963
+  - jazda: 0.5934
+  - ludność: 0.5710
+  - nasza: 0.5635
+  - polska: 0.5513
+  - piechota: 0.5411
+  - służba: 0.5301
+
+10 tokenów najbardziej podobnych do SŁOWA 'choroba' (uśrednione wektory tokenów ['choroba']):
+  > Wektor słowa (początek): [ 0.19456641 -0.32303154 -0.12241117 -1.6051856  -1.1385529 ]...
+  - choroba: 1.0000
+  - zdrada: 0.6860
+  - energia: 0.6652
+  - jakaś: 0.6638
+  - delikatna: 0.6441
+  - pasja: 0.6392
+  - taka: 0.6358
+  - impreza: 0.6323
+  - wyprawa: 0.6301
+  - wielka: 0.6183
+
+10 tokenów najbardziej podobnych do SŁOWA 'król' (uśrednione wektory tokenów ['król']):
+  > Wektor słowa (początek): [ 0.09023438 -2.345346    1.7831788   1.8411181   5.1922665 ]...
+  - król: 1.0000
+  - książę: 0.6912
+  - hetman: 0.6309
+  - Karol: 0.6293
+  - Chmielnicki: 0.6220
+  - mistrz: 0.6043
+  - on: 0.5843
+  - Krzywonos: 0.5721
+  - Zakon: 0.5624
+  - Hetman: 0.5591
+
+10 tokenów najbardziej podobnych do kombinacji tokenów: ['dziecko', 'kobieta']
+  - dziewczyna: 0.6554
+  - Ligia: 0.6089
+  - sama: 0.6085
+  - ona: 0.6063
+  - osoba: 0.5884
+  - panienka: 0.5766
+  - bóstwo: 0.5394
+  - Oleńka: 0.5370
+  - dusza: 0.5359
+  - córka: 0.5321
