@@ -144,7 +144,7 @@ class SessionManager:
                 console.print_error(error)
                 # Fallback to new session
                 session = ChatSession(assistant=assistant)
-                console.print_info(f"Rozpoczęto nową sesję z ID: {session.session_id}")
+                console.print_info(f"Rozpoczęto nową sesję")
             
             self._current_session = session
             
@@ -174,6 +174,7 @@ class SessionManager:
         if session.is_empty():
             console.print_info(f"\nSesja jest pusta/niekompletna. Pominięto finalny zapis.")
         else:
-            console.print_info(f"\nFinalny zapis historii sesji: {session.session_id}")
+            display_name = session_files.get_session_display_name(session.session_id)
+            console.print_info(f"\nFinalny zapis historii sesji: {display_name}")
             session.save_to_file()
             console.display_final_instructions(session.session_id)

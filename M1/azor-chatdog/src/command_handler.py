@@ -4,8 +4,9 @@ from commands.session_list import list_sessions_command
 from commands.session_display import display_full_session
 from commands.session_to_pdf import export_session_to_pdf
 from commands.session_remove import remove_session_command
+from commands.session_rename import rename_session_command
 
-VALID_SLASH_COMMANDS = ['/exit', '/quit', '/switch', '/help', '/session', '/pdf']
+VALID_SLASH_COMMANDS = ['/exit', '/quit', '/switch', '/help', '/session', '/pdf', '/audio', '/rename']
 
 def handle_command(user_input: str) -> bool:
     """
@@ -27,6 +28,10 @@ def handle_command(user_input: str) -> bool:
     elif command == '/help':
         current = manager.get_current_session()
         console.display_help(current.session_id)
+
+    elif command == '/audio':
+        current = manager.get_current_session()
+        console.display_help(current.session_id)
     
     # Exit commands
     if command in ['/exit', '/quit']:
@@ -42,19 +47,23 @@ def handle_command(user_input: str) -> bool:
                 console.print_info("Jesteś już w tej sesji.")
             else:
                 new_session, save_attempted, previous_session_id, load_successful, load_error, has_history = manager.switch_to_session(new_id)
-                
+
                 # Handle console output for save attempt
                 if save_attempted:
-                    console.print_info(f"\nZapisuję bieżącą sesję: {previous_session_id}...")
-                
+                    from files import session_files
+                    prev_display_name = session_files.get_session_display_name(previous_session_id)
+                    console.print_info(f"\nZapisuję bieżącą sesję: {prev_display_name}...")
+
                 # Handle load result
                 if not load_successful:
                     console.print_error(f"Nie można wczytać sesji o ID: {new_id}. {load_error}")
                 else:
                     # Successfully switched
-                    console.print_info(f"\n--- Przełączono na sesję: {new_session.session_id} ---")
+                    from files import session_files
+                    new_display_name = session_files.get_session_display_name(new_session.session_id)
+                    console.print_info(f"\n--- Przełączono na sesję: {new_display_name} ---")
                     console.display_help(new_session.session_id)
-                    
+
                     # Display history summary if session has content
                     if has_history:
                         from commands.session_summary import display_history_summary
@@ -73,6 +82,16 @@ def handle_command(user_input: str) -> bool:
         current = manager.get_current_session()
         export_session_to_pdf(current.get_history(), current.session_id, current.assistant_name)
 
+    # Rename command
+    elif command == '/rename':
+        if len(parts) < 3:
+            console.print_error("Błąd: Użycie: /rename <SESSION-ID> <nowa-nazwa>")
+            console.print_info("Przykład: /rename abc123 Moja_nowa_nazwa")
+        else:
+            session_id = parts[1]
+            new_name = ' '.join(parts[2:])  # Join all remaining parts as the new name
+            rename_session_command(session_id, new_name)
+
     return False
 
 
@@ -84,6 +103,9 @@ def handle_session_subcommand(subcommand: str, manager):
         list_sessions_command()
         
     elif subcommand == 'display':
+        display_full_session(current.get_history(), current.session_id, current.assistant_name)
+
+    elif subcommand == 'audio':
         display_full_session(current.get_history(), current.session_id, current.assistant_name)
         
     elif subcommand == 'pop':
@@ -101,15 +123,17 @@ def handle_session_subcommand(subcommand: str, manager):
         
     elif subcommand == 'new':
         new_session, save_attempted, previous_session_id, save_error = manager.create_new_session(save_current=True)
-        
+
         # Handle console output for save attempt
         if save_attempted:
-            console.print_info(f"\nZapisuję bieżącą sesję: {previous_session_id} przed rozpoczęciem nowej...")
+            from files import session_files
+            prev_display_name = session_files.get_session_display_name(previous_session_id)
+            console.print_info(f"\nZapisuję bieżącą sesję: {prev_display_name} przed rozpoczęciem nowej...")
             if save_error:
                 console.print_error(f"Błąd podczas zapisu: {save_error}")
-        
+
         # Display new session info
-        console.print_info(f"\n--- Rozpoczęto nową sesję: {new_session.session_id} ---")
+        console.print_info(f"\n--- Rozpoczęto nową sesję ---")
         console.display_help(new_session.session_id)
 
     elif subcommand == 'remove':

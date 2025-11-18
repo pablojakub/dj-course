@@ -1,4 +1,4 @@
-# Zadanie 1
+# Zadanie 1 - zrobione
 
 Jailbreaking.
 Sprowokuj wybranego LLMa (może lepiej lokalnego, aby "nie naruszać zasad" dostawców zewn.) do wykonania akcji niedozwolonej.
@@ -9,7 +9,7 @@ Przykłady/inspiracje: `M2/jailbreaking`.
 
 **CEL**: osiągnięcie min. 1 skutecznego jailbreaka.
 
-# Zadanie 2
+# Zadanie 2 - do zrobienia
 
 Syntezacja mowy: **TEXT-TO-SPEECH**
 
@@ -55,13 +55,13 @@ docs:
 
 **Bazowy kod jest gotowy do uruchomienia**.
 
-## Zadanie 2.1
+## Zadanie 2.1 - do zrobienia
 
 Uruchom wybrany model **text-to-speech**. Rekomendowane: xtts (suno/bark daje mocno zaszumiony output). Jeśli wybierzesz xtts - daj swoją próbkę głosu, aby wygenerować syntetycznie Twoją mowę.
 
 **CEL**: uruchomiłeś/aś syntezator lokalnie
 
-## Zadanie 2.2
+## Zadanie 2.2 - do zrobienia
 
 Do AZØRA (asystenta czatowego) dodaj nową komendę, np. `/audio` która wygeneruje dźwięk ostatniej odpowiedzi AZØRA jako plik dźwiękowy.
 
@@ -82,7 +82,7 @@ Do łączenia wielu plików .wav w 1 - wykorzystaj **dowolną** bibliotekę (np.
 - uruchamiasz nową komendę np. `/audio-all`
 - generuje się cała dotychczasowa konwersacja jako .wav
 
-# Zadanie 3
+# Zadanie 3 - do pominięcia
 
 Transkrypcja mowy: **SPEECH-TO-TEXT**
 
@@ -123,7 +123,7 @@ przy czym - do obsługi `openai/whisper-tiny` - i tak będziesz potrzebować pyt
 
 Natomiast complexity związane z uruchamianiem serwera go/rust który dopiero uruchamia pythona - znika, jeśli wykorzystasz tkintera.
 
-# Zadanie 4
+# Zadanie 4 do pominięcia
 
 `Toon` (Token-Oriented Object Notation)
 https://github.com/toon-format/toon
@@ -215,7 +215,7 @@ models
   JSON           ############........     33.8% (1033)
 ```
 
-# Zadanie 5
+# Zadanie 5 - zrobione
 
 Research codebase przy użyciu [code2tutorial](https://code2tutorial.com/).
 
@@ -272,7 +272,7 @@ Inspiracje asystentów:
 - optymistyczny pochlebca który zawsze pocieszy i dopytuje jak się czujesz.
 ale to może być co-/ktokolwiek.
 
-# Zadanie 8
+# Zadanie 8 - do pominięcia
 
 TEXT-TO-SONG ;)
 
